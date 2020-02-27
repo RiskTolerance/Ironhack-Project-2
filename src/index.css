@@ -1,0 +1,190 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,600,800,900&display=swap");
+
+* {
+  font-family: "Raleway";
+  color: whitesmoke;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.app {
+  height: 100vh;
+  background-image: url("./img/BG-christian-perner-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.navBar {
+  display: flex;
+  background-color: #65efc1;
+}
+
+.navInstruction {
+  color: #226b51;
+  font-weight: 400;
+  border-style: none none none double;
+  border-width: 10px;
+  border-color: whitesmoke;
+  padding-left: 10px;
+  margin: auto;
+  width: 15%;
+  margin-left: 5vw;
+  text-align: left;
+}
+
+.titleText {
+  position: absolute;
+  right: 20px;
+  top: -10px;
+  font-size: 7em;
+}
+
+.logo {
+  width: 80px;
+  margin: 20px;
+}
+
+.imageSelect {
+  flex-grow: 1;
+}
+
+.contentPosition {
+  align-self: flex-end;
+  width: 95%;
+  height: 80%;
+  margin-right: 25px;
+}
+
+.imageSelect {
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.imageSelectLeft,
+.imageSelectRight {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.imageSelectLeft {
+  width: 65%;
+  justify-content: start;
+}
+
+.imageSelectRight {
+  width: 35%;
+  justify-content: end;
+}
+
+.searchBar {
+  height: 8%;
+}
+
+.searchBar {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.searchForm {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchInput {
+  width: 80%;
+  height: 80%;
+  border-style: solid;
+  border-color: #65efc1;
+  border-width: 6px;
+  color: #226b51;
+  font-size: 1.5em;
+}
+
+.searchResults,
+.selectedImages {
+  height: 80%;
+}
+
+.searchResults {
+  border-style: none solid none solid;
+  border-color: #65efc1;
+  border-width: 8px;
+}
+
+.innerSearchResults {
+  width: 95%;
+  height: 94%;
+  margin: auto;
+  margin-top: 1.5%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.returnedImageCard {
+  height: 140px;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.returnedImage {
+  height: 140px;
+  transition: all 0.2s ease-in-out;
+}
+
+.returnedImage:hover {
+  transform: scale(1.8);
+  border-style: solid;
+  border-color: #65efc1;
+  border-width: 5px;
+}
+
+.userSelectedImageCard {
+  height: 25%;
+  width: 50%;
+}
+
+.returnedUserImage {
+  height: 90%;
+  margin: auto;
+  transition: all 0.2s ease-in-out;
+}
+
+.returnedUserImage:hover {
+  transform: scale(1.2);
+  border-style: solid;
+  border-color: #65efc1;
+  border-width: 5px;
+}
+
+.doneButtonContainer {
+  height: 8%;
+}
+
+.doneButton {
+  border: none;
+  background-color: #65efc1;
+  width: 300px;
+  height: 50px;
+  font-size: 1.5em;
+  font-weight: 800;
+  cursor: none;
+}
+
+.doneButton:hover {
+  font-size: 2em;
+}
+
+.footer {
+  text-align: center;
+  justify-self: flex-end;
+}
