@@ -10,14 +10,27 @@ export const ImageSelect = props => {
   props.setInstructions(
     "Select up to 8 images which best represent your brand"
   );
+
+  let themeColor = props.userColors[3]
+    ? `rgb(${props.userColors[3][0]},${props.userColors[3][1]},${props.userColors[3][2]})`
+    : [102, 255, 204];
+
   return (
     <div className='contentPosition'>
       <div className='imageSelect'>
         <div className='imageSelectLeft'>
           <div className='searchBar'>
-            <SearchBar userSubmit={props.userSubmit} />
+            <SearchBar
+              userSubmit={props.userSubmit}
+              userColors={props.userColors}
+            />
           </div>
-          <div className='searchResults'>
+          <div
+            className='searchResults'
+            style={{
+              borderColor: `${themeColor}`
+            }}
+          >
             <SearchResults
               foundImages={props.foundImages}
               onImageSelect={props.onImageSelect}
@@ -26,14 +39,14 @@ export const ImageSelect = props => {
         </div>
         <div className='imageSelectRight'>
           <div className='selectedImages'>
-            <SelectedImages 
+            <SelectedImages
               userImages={props.userImages}
               imageDelete={props.imageDelete}
             />
           </div>
           <div className='doneButtonContainer'>
             <Link to='heroselect'>
-              <DoneButton />
+              <DoneButton userColors={props.userColors} />
             </Link>
           </div>
         </div>

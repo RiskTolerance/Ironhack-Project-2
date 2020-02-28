@@ -98,7 +98,7 @@ export const App = () => {
   const onImagesSelect = img => {
     if (userImages.foundImages.length <= 7) {
       console.log(img);
-      getImageColors(img.urls.regular);
+      //getImageColors(img.urls.regular);
       setUserImages({ foundImages: [...userImages.foundImages, img] });
       console.log(img.id);
       console.log(userImages.foundImages);
@@ -143,6 +143,7 @@ export const App = () => {
               {...props}
               pageTitle={title}
               pageInstructions={instructions}
+              userColors={userColors}
             />
           )}
         />
@@ -162,6 +163,7 @@ export const App = () => {
                 imageDelete={imageDelete}
                 foundImages={state.images}
                 userImages={userImages.foundImages}
+                userColors={userColors}
               />
             )}
           />

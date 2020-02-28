@@ -34,7 +34,7 @@ export const HeroSelect = props => {
       </div>
 
       <Link to='moodboard'>
-        <DoneButton />
+        <DoneButton userColors={props.userColors}/>
       </Link>
     </div>
   );
