@@ -6,12 +6,19 @@ import { ImageSelect } from "./components/ImageSelect";
 import { MoodBoard } from "./components/MoodBoard";
 import { Footer } from "./components/Footer";
 import axios from "axios";
+import Color from "color";
 import Clarifai from "clarifai";
 
 export const App = () => {
   const [state, setState] = useState({ images: [] });
 
   const [userImages, setUserImages] = useState({ foundImages: [] });
+
+  const [heroImage, setHeroImage] = useState(
+    "../public/img/BG-christian-perner-unsplash.jpg"
+  );
+
+  const [userColors, setUserColors] = useState([]);
 
   const clarifaiApp = new Clarifai.App({
     apiKey: "4611dc593f3a4e6f9263b4d5d8bc2cf5"
@@ -29,36 +36,27 @@ export const App = () => {
     setState({ ...state, images: response.data.results });
   };
 
-  const onHeroSelect = async () => {
-    const response = await clarifaiApp.models
-      .predict(
-        "eeed0b6733a644cea07cf4c60f87ebb7",
-        "https://images.unsplash.com/photo-1523585895729-a4bb980d5c14?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=632&q=80"
-      )
-      .then(
-        function(response) {
-          console.log("I found some colors for you!");
-          console.log(response.rawData.outputs[0].data.colors);
-        },
-        function(err) {
-          console.log("I couldn't find any colors :(");
-        }
-      );
-  };
-
-  const returnPalette = async () => {
+  const returnPalette = async returnedColors => {
+    let rgbColors = returnedColors.map(eachColor => {
+      console.log(eachColor);
+      return Color(eachColor.raw_hex)
+        .rgb()
+        .array();
+    });
+    console.log(rgbColors);
     var url = "http://colormind.io/api/";
     var data = {
       model: "default",
-      input: [[44, 43, 44], [90, 83, 82], "N", "N", "N"]
+      input: rgbColors
     };
 
     var http = new XMLHttpRequest();
 
     http.onreadystatechange = function() {
-      if (http.readyState == 4 && http.status == 200) {
+      if (http.readyState === 4 && http.status === 200) {
         var palette = JSON.parse(http.responseText).result;
         console.log(palette);
+        setUserColors(palette);
       }
     };
 
@@ -66,8 +64,39 @@ export const App = () => {
     http.send(JSON.stringify(data));
   };
 
+  const getImageColors = async url => {
+    console.log(url);
+    const response = await clarifaiApp.models
+      .predict("eeed0b6733a644cea07cf4c60f87ebb7", url)
+      .then(
+        function(response) {
+          console.log("I found some colors for you!");
+          console.log(response.rawData.outputs[0].data.colors);
+          let sortedColors = response.rawData.outputs[0].data.colors.sort(
+            (a, b) => {
+              if (a.value > b.value) {
+                return -1;
+              } else if (a.value < b.value) {
+                return 1;
+              } else {
+                return 0;
+              }
+            }
+          );
+          console.log(sortedColors);
+          returnPalette(sortedColors);
+          //now we need to convert the colors to RGB
+        },
+        function(err) {
+          console.log("I couldn't find any colors :(");
+        }
+      );
+  };
+
   const onImagesSelect = img => {
     if (userImages.foundImages.length <= 7) {
+      console.log(img);
+      getImageColors(img.urls.regular);
       setUserImages({ foundImages: [...userImages.foundImages, img] });
       console.log(img.id);
       console.log(userImages.foundImages);
@@ -82,6 +111,11 @@ export const App = () => {
     let newIndex = [...userImages.foundImages].splice(deleteIndex, 1);
     //setUserImages(newIndex);
     console.log(newIndex);
+  };
+
+  const setHero = img => {
+    console.log(img);
+    getImageColors(img.urls.regular);
   };
 
   const [title, setTitle] = useState("Select Images");
@@ -135,6 +169,9 @@ export const App = () => {
               {...props}
               setTitle={titleSet}
               setInstructions={instructionsSet}
+              userImages={userImages.foundImages}
+              setHero={setHero}
+              userColors={userColors}
             />
           )}
         />

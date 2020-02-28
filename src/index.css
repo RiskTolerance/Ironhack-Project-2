@@ -40,7 +40,7 @@
   position: absolute;
   right: 20px;
   top: -10px;
-  font-size: 7em;
+  font-size: 8em;
 }
 
 .logo {
@@ -168,6 +168,57 @@
 
 .doneButtonContainer {
   height: 8%;
+}
+
+.heroImageContainer {
+  height: 69vh;
+  margin: 1vw 2vw;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.heroImageCard {
+  width: 25%;
+  height: 50%;
+}
+
+.heroImage {
+  max-width: 90%;
+  max-height: 80%;
+  margin: auto;
+  transition: all 0.2s ease-in-out;
+}
+
+.heroImage:hover {
+  border-style: solid;
+  border-color: #65efc1;
+  border-width: 5px;
+}
+
+.swatches {
+  width: 50%;
+  padding: 10px;
+  height: 30px;
+  z-index: 5;
+  position: relative;
+  bottom: 40px;
+  display: flex;
+  margin: auto;
+  border-radius: 2px;
+}
+
+.swatch1,
+.swatch2,
+.swatch3,
+.swatch4,
+.swatch5 {
+  height: 100%;
+  width: 15%;
+  margin: auto;
+  background-color: whitesmoke;
+  z-index: 99;
+  border-radius: 1px;
+  box-shadow: 0px 0px 4px black;
 }
 
 .doneButton {
