@@ -46,7 +46,7 @@ export const ImageSelect = props => {
           </div>
           <div className='doneButtonContainer'>
             <Link to='heroselect'>
-              <DoneButton userColors={props.userColors} />
+              <DoneButton userColors={props.userColors} please='please' />
             </Link>
           </div>
         </div>
