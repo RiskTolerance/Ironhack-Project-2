@@ -8,14 +8,30 @@
   text-align: center;
 }
 
+html {
+  overflow: hidden;
+}
+
 .app {
   height: 100vh;
-  background-image: url("./img/BG-christian-perner-unsplash.jpg");
+  /* background-image: url("./img/BG-christian-perner-unsplash.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.bg {
+  z-index: -100;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  filter: blur(5px) saturate(0.3) brightness(0.5);
+  scale: 1.1;
 }
 
 .navBar {
@@ -171,8 +187,9 @@
 }
 
 .heroImageContainer {
-  height: 69vh;
-  margin: 1vw 2vw;
+  height: 55vh;
+  width: 75vw;
+  margin: 20px auto;
   display: flex;
   flex-wrap: wrap;
 }
@@ -183,8 +200,8 @@
 }
 
 .heroImage {
-  max-width: 90%;
-  max-height: 80%;
+  max-width: 95%;
+  max-height: 95%;
   margin: auto;
   transition: all 0.2s ease-in-out;
 }
@@ -195,7 +212,7 @@
   border-width: 5px;
 }
 
-.swatches {
+/* .swatches {
   width: 50%;
   padding: 10px;
   height: 30px;
@@ -205,9 +222,9 @@
   display: flex;
   margin: auto;
   border-radius: 2px;
-}
+} */
 
-.swatch1,
+/* .swatch1,
 .swatch2,
 .swatch3,
 .swatch4,
@@ -219,6 +236,43 @@
   z-index: 99;
   border-radius: 1px;
   box-shadow: 0px 0px 4px black;
+} */
+
+.swatchContainer {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  margin-bottom: 30px;
+  height: 10vh;
+}
+
+.swatches {
+  width: 80%;
+  height: 80px;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  border-radius: 2px;
+}
+
+.swatch {
+  height: 100%;
+  width: 100%;
+  margin-bottom: 5px;
+  background-color: whitesmoke;
+  border-radius: 1px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+}
+
+.swatchColor {
+  width: 15%;
+  height: 80%;
+  margin: 5px;
+}
+
+.swatchName {
+  color: whitesmoke;
+  font-weight: 600;
 }
 
 .doneButton {

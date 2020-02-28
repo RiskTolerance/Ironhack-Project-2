@@ -14,9 +14,11 @@ export const App = () => {
 
   const [userImages, setUserImages] = useState({ foundImages: [] });
 
-  const [heroImage, setHeroImage] = useState(
-    "../public/img/BG-christian-perner-unsplash.jpg"
+  const [bgImage, setBgImage] = useState(
+    "https://images.unsplash.com/photo-1501769214405-5e5ee5125a02?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1996&q=80"
   );
+
+  const [heroImage, setHeroImage] = useState("");
 
   const [userColors, setUserColors] = useState([]);
 
@@ -114,7 +116,8 @@ export const App = () => {
   };
 
   const setHero = img => {
-    console.log(img);
+    setHeroImage(img.urls.full);
+    setBgImage('');
     getImageColors(img.urls.regular);
   };
 
@@ -127,74 +130,80 @@ export const App = () => {
   const instructionsSet = instructions => setInstructions(instructions);
 
   return (
-    <div className='app'>
-      {/* Nav bar */}
-      <Route
-        render={props => (
-          <NavBar
-            {...props}
-            pageTitle={title}
-            pageInstructions={instructions}
+    <div>
+      <div
+        className='bg'
+        style={{ backgroundImage: `url(${heroImage})` }}
+      ></div>
+      <div className='app' style={{ backgroundImage: `url(${bgImage})` }}>
+        {/* Nav bar */}
+        <Route
+          render={props => (
+            <NavBar
+              {...props}
+              pageTitle={title}
+              pageInstructions={instructions}
+            />
+          )}
+        />
+
+        {/* Home */}
+        <Switch>
+          <Route
+            exact
+            path='/'
+            render={props => (
+              <ImageSelect
+                {...props}
+                setTitle={titleSet}
+                setInstructions={instructionsSet}
+                userSubmit={onSearchSubmit}
+                onImageSelect={onImagesSelect}
+                imageDelete={imageDelete}
+                foundImages={state.images}
+                userImages={userImages.foundImages}
+              />
+            )}
           />
-        )}
-      />
+        </Switch>
 
-      {/* Home */}
-      <Switch>
-        <Route
-          exact
-          path='/'
-          render={props => (
-            <ImageSelect
-              {...props}
-              setTitle={titleSet}
-              setInstructions={instructionsSet}
-              userSubmit={onSearchSubmit}
-              onImageSelect={onImagesSelect}
-              imageDelete={imageDelete}
-              foundImages={state.images}
-              userImages={userImages.foundImages}
-            />
-          )}
-        />
-      </Switch>
+        {/* select Hero image */}
+        <Switch>
+          <Route
+            exact
+            path='/heroselect'
+            render={props => (
+              <HeroSelect
+                {...props}
+                setTitle={titleSet}
+                setInstructions={instructionsSet}
+                userImages={userImages.foundImages}
+                setHero={setHero}
+                userColors={userColors}
+              />
+            )}
+          />
+          />
+        </Switch>
 
-      {/* select Hero image */}
-      <Switch>
-        <Route
-          exact
-          path='/heroselect'
-          render={props => (
-            <HeroSelect
-              {...props}
-              setTitle={titleSet}
-              setInstructions={instructionsSet}
-              userImages={userImages.foundImages}
-              setHero={setHero}
-              userColors={userColors}
-            />
-          )}
-        />
-        />
-      </Switch>
+        {/* Final Moodboard */}
+        <Switch>
+          <Route
+            exact
+            path='/moodboard'
+            render={props => (
+              <MoodBoard
+                {...props}
+                setTitle={titleSet}
+                setInstructions={instructionsSet}
+              />
+            )}
+          />
+        </Switch>
 
-      {/* Final Moodboard */}
-      <Switch>
-        <Route
-          exact
-          path='/moodboard'
-          render={props => (
-            <MoodBoard
-              {...props}
-              setTitle={titleSet}
-              setInstructions={instructionsSet}
-            />
-          )}
-        />
-      </Switch>
-
-      {/* Footer */}
-      <Footer />
+        {/* Footer */}
+        <Footer />
+      </div>
     </div>
   );
 };

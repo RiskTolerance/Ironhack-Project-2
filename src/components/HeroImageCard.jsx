@@ -11,16 +11,16 @@ export const HeroImageCard = props => {
         src={props.image.urls.regular}
         alt={props.alt_description}
       />
-      <div className='swatches'>
+      {/* <div className='swatches'>
         {props.userColors.map(eachColor => {
           console.log(eachColor);
           let style = {
             backgroundColor: `rgb(${eachColor[0]},${eachColor[1]},${eachColor[2]})`
           };
           console.log(style);
-          return <div style={style} className='swatch1' />;
+          return <div style={style} className='swatch1'></div>;
         })}
-      </div>
+      </div> */}
     </div>
   );
 };

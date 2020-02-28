@@ -13,6 +13,26 @@ export const HeroSelect = props => {
         setHero={props.setHero}
         userColors={props.userColors}
       />
+      <div className='swatchContainer'>
+        <div className='swatches'>
+          {props.userColors.map(eachColor => {
+            //console.log(eachColor);
+            let style = {
+              backgroundColor: `rgb(${eachColor[0]},${eachColor[1]},${eachColor[2]})`
+            };
+            //console.log(style);
+            return (
+              <div className='swatchColor'>
+                <div style={style} className='swatch'></div>
+                <div className='swatchName'>
+                  RGB ({eachColor[0]},{eachColor[1]},{eachColor[2]})
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
       <Link to='moodboard'>
         <DoneButton />
       </Link>
